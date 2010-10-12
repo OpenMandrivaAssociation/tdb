@@ -1,12 +1,12 @@
 %define tdbmajor	1
-%define tdbver		1.2.1
+%define version		1.2.1
 %define epoch 1
 
 %define libtdb %mklibname tdb %tdbmajor
 %define tdbdevel %mklibname -d tdb
 
 Name: tdb
-Version: %tdbver
+Version: %version
 # We shipped it in samba3 versioned with the samba3 version
 Epoch: %epoch
 Release: %mkrel 1
@@ -14,8 +14,8 @@ Group: System/Libraries
 License: GPLv2
 URL: http://tdb.samba.org/
 Summary: Library implementing Samba's embedded database
-Source: http://samba.org/ftp/tdb/tdb-%{tdbver}.tar.gz
-Source1: http://samba.org/ftp/tdb/tdb-%{tdbver}.tar.gz.asc
+Source: http://samba.org/ftp/tdb/tdb-%{version}.tar.gz
+Source1: http://samba.org/ftp/tdb/tdb-%{version}.tar.gz.asc
 BuildRequires: python-devel xsltproc
 BuildRoot: %{_tmppath}/%{name}-root
 
@@ -42,7 +42,7 @@ Tools for backing up, restoring, and manipulating Samba's embedded database
 Group: Development/C
 Summary: Library implementing Samba's embedded database
 Provides: tdb-devel = %{epoch}:%{version}-%{release}
-#Version: %tdbver
+#Version: %version
 Requires: %libtdb = %{epoch}:%{version}-%{release}
 # because /usr/include/tdb.h was moved from libsmbclient0-devel to libtdb-devel
 Conflicts: %{mklibname smbclient 0 -d} < 3.2.6-3
