@@ -1,5 +1,5 @@
 %define tdbmajor	1
-%define version		1.2.1
+%define version		1.2.7
 %define epoch 1
 
 %define libtdb %mklibname tdb %tdbmajor
