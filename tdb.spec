@@ -9,13 +9,14 @@ Name: tdb
 Version: %version
 # We shipped it in samba3 versioned with the samba3 version
 Epoch: %epoch
-Release: %mkrel 1
+Release: %mkrel 2
 Group: System/Libraries
 License: GPLv2
 URL: http://tdb.samba.org/
 Summary: Library implementing Samba's embedded database
 Source: http://samba.org/ftp/tdb/tdb-%{version}.tar.gz
 Source1: http://samba.org/ftp/tdb/tdb-%{version}.tar.gz.asc
+Patch0: tdb-1.2.7-PUBLIC_fix.diff
 BuildRequires: python-devel xsltproc
 BuildRoot: %{_tmppath}/%{name}-root
 
@@ -59,6 +60,7 @@ Pyhton bindings to Samba's tdb embedded database
 
 %prep
 %setup -q
+%patch0 -p3
 
 %build
 %configure
