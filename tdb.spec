@@ -61,6 +61,7 @@ Pyhton bindings to Samba's tdb embedded database
 %setup -q
 
 %build
+export PYTHONDIR=%{py_platsitedir}
 %configure2_5x
 %make
 
