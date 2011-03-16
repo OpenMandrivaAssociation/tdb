@@ -15,7 +15,7 @@ License: GPLv2
 URL: http://tdb.samba.org/
 Summary: Library implementing Samba's embedded database
 Source: http://samba.org/ftp/tdb/tdb-%{version}.tar.gz
-Source1: http://samba.org/ftp/tdb/tdb-%{version}.tar.gz.asc
+Source1: http://samba.org/ftp/tdb/tdb-%{version}.tar.asc
 Patch0: tdb-1.2.7-PUBLIC_fix.diff
 BuildRequires: python-devel xsltproc
 BuildRoot: %{_tmppath}/%{name}-root
