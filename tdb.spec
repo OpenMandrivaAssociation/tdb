@@ -16,7 +16,7 @@ URL: http://tdb.samba.org/
 Summary: Library implementing Samba's embedded database
 Source: http://samba.org/ftp/tdb/tdb-%{version}.tar.gz
 Source1: http://samba.org/ftp/tdb/tdb-%{version}.tar.asc
-BuildRequires: python-devel xsltproc
+BuildRequires: python-devel xsltproc docbook-style-xsl
 BuildRoot: %{_tmppath}/%{name}-root
 
 %description
