@@ -61,7 +61,7 @@ Pyhton bindings to Samba's tdb embedded database
 %setup -q
 
 %build
-%configure
+%configure2_5x
 %make
 
 %install
@@ -79,7 +79,7 @@ rm -Rf %{buildroot}
 %files -n %tdbdevel
 %defattr(-,root,root)
 %{_libdir}/libtdb.so
-%{_libdir}/libtdb.a
+#{_libdir}/libtdb.a
 %{_includedir}/tdb.h
 %{_libdir}/pkgconfig/tdb.pc
 
