@@ -9,7 +9,7 @@ Name: tdb
 Version: %version
 # We shipped it in samba3 versioned with the samba3 version
 Epoch: %epoch
-Release: %mkrel 1
+Release: %mkrel 2
 Group: System/Libraries
 License: GPLv2
 URL: http://tdb.samba.org/
@@ -62,7 +62,7 @@ Pyhton bindings to Samba's tdb embedded database
 
 %build
 export PYTHONDIR=%{py_platsitedir}
-%configure2_5x
+%configure2_5x	--disable-rpath
 %make
 
 %install
