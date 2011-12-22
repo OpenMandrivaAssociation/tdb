@@ -5,6 +5,16 @@
 %define libtdb %mklibname tdb %tdbmajor
 %define tdbdevel %mklibname -d tdb
 
+%define check_sig() export GNUPGHOME=%{_tmppath}/rpm-gpghome \
+if [ -d "$GNUPGHOME" ] \
+then echo "Error, GNUPGHOME $GNUPGHOME exists, remove it and try again"; exit 1 \
+fi \
+install -d -m700 $GNUPGHOME \
+gpg --import %{1} \
+gpg --trust-model always --verify %{2} \
+rm -Rf $GNUPGHOME \
+
+
 Name: tdb
 Version: %version
 # We shipped it in samba3 versioned with the samba3 version
@@ -16,6 +26,7 @@ URL: http://tdb.samba.org/
 Summary: Library implementing Samba's embedded database
 Source: http://samba.org/ftp/tdb/tdb-%{version}.tar.gz
 Source1: http://samba.org/ftp/tdb/tdb-%{version}.tar.asc
+Source2: tridge.asc
 BuildRequires: python-devel xsltproc docbook-style-xsl
 BuildRoot: %{_tmppath}/%{name}-root
 
@@ -58,6 +69,15 @@ Summary: Python bindings to Samba's tdb embedded database
 Pyhton bindings to Samba's tdb embedded database
 
 %prep
+#Try and validate signatures on source:
+VERIFYSOURCE=%{SOURCE0}
+VERIFYSOURCE=${VERIFYSOURCE%%.gz}
+gzip -dc %{SOURCE0} > $VERIFYSOURCE
+
+%check_sig %{SOURCE2} %{SOURCE1} $VERIFYSOURCE
+
+rm -f $VERIFYSOURCE
+
 %setup -q
 
 %build
