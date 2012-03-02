@@ -82,6 +82,7 @@ export PYTHONDIR=%{py_platsitedir}
 
 %install
 %makeinstall_std
+chmod 755 %{buildroot}%{_libdir}/libtdb.so.%{major}* %{buildroot}%{py_platsitedir}/tdb.so
 
 %files -n %{libname}
 %{_libdir}/libtdb.so.%{major}*
