@@ -48,8 +48,8 @@ Tools for backing up, restoring, and manipulating Samba's embedded database
 %package -n     %{devname}
 Group:          Development/C
 Summary:        Library implementing Samba's embedded database
-Provides:       tdb-devel = %{epoch}:%{version}-%{release}
-Requires:       %{libname} = %{epoch}:%{version}-%{release}
+Provides:       tdb-devel = %{EVRD}
+Requires:       %{libname} = %{EVRD}
 # because /usr/include/tdb.h was moved from libsmbclient0-devel to libname-devel
 Conflicts:      %{mklibname smbclient 0 -d} < 3.2.6-3
 
