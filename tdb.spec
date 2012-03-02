@@ -84,10 +84,10 @@ export PYTHONDIR=%{py_platsitedir}
 %makeinstall_std
 
 %files -n %{libname}
-%{_libdir}/libname.so.%{major}*
+%{_libdir}/libtdb.so.%{major}*
 
 %files -n %{devname}
-%{_libdir}/libname.so
+%{_libdir}/libtdb.so
 #{_libdir}/libname.a
 %{_includedir}/tdb.h
 %{_libdir}/pkgconfig/tdb.pc
