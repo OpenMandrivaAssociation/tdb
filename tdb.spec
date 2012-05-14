@@ -13,7 +13,7 @@ rm -Rf $GNUPGHOME \
 
 
 Name:           tdb
-Version:        1.2.9
+Version:        1.2.10
 # We shipped it in samba3 versioned with the samba3 version
 Epoch:          1
 Release:        3
