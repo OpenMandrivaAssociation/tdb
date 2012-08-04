@@ -1,6 +1,13 @@
 %define major   1
 %define libname %mklibname tdb %{major}
 %define devname %mklibname -d tdb
+%define beta beta5
+
+# beta releases are taken from the samba4 tarball using
+# mkdir -p tdb-1.2.11/lib
+# cp -a buildtools lib/tdb/* tdb-1.2.11/
+# cp -a lib/replace tdb-1.2.11/lib/
+# tar cf tdb-1.2.11.tar tdb-1.2.11
 
 %define check_sig() export GNUPGHOME=%{_tmppath}/rpm-gpghome \
 if [ -d "$GNUPGHOME" ] \
@@ -13,17 +20,21 @@ rm -Rf $GNUPGHOME \
 
 
 Name:           tdb
-Version:        1.2.10
+Version:        1.2.11
 # We shipped it in samba3 versioned with the samba3 version
 Epoch:          1
-Release:        3
+%if "%beta" != ""
+Release:	0.%beta.1
+%else
+Release:        1
+Source1:        http://samba.org/ftp/tdb/tdb-%{version}.tar.asc
+Source2:        tridge.asc
+%endif
 Group:          System/Libraries
 License:        GPLv2
 URL:            http://tdb.samba.org/
 Summary:        Library implementing Samba's embedded database
-Source0:        http://samba.org/ftp/tdb/tdb-%{version}.tar.gz
-Source1:        http://samba.org/ftp/tdb/tdb-%{version}.tar.asc
-Source2:        tridge.asc
+Source0:        http://samba.org/ftp/tdb/tdb-%{version}.tar.xz
 BuildRequires:  python-devel xsltproc docbook-style-xsl
 
 %description
@@ -64,6 +75,7 @@ Summary:        Python bindings to Samba's tdb embedded database
 Pyhton bindings to Samba's tdb embedded database
 
 %prep
+%if "%beta" == ""
 #Try and validate signatures on source:
 VERIFYSOURCE=%{SOURCE0}
 VERIFYSOURCE=${VERIFYSOURCE%%.gz}
@@ -72,6 +84,7 @@ gzip -dc %{SOURCE0} > $VERIFYSOURCE
 #check_sig %{SOURCE2} %{SOURCE1} $VERIFYSOURCE
 
 rm -f $VERIFYSOURCE
+%endif
 
 %setup -q
 
