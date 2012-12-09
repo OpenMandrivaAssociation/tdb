@@ -1,7 +1,7 @@
 %define major   1
 %define libname %mklibname tdb %{major}
 %define devname %mklibname -d tdb
-%define beta beta6
+%define beta beta5
 
 # beta releases are taken from the samba4 tarball using
 # mkdir -p tdb-1.2.11/lib
