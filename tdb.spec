@@ -1,7 +1,7 @@
 %define major   1
 %define libname %mklibname tdb %{major}
 %define devname %mklibname -d tdb
-%define beta beta5
+%define beta %nil
 
 # beta releases are taken from the samba4 tarball using
 # mkdir -p tdb-1.2.11/lib
@@ -27,14 +27,14 @@ Epoch:          1
 Release:	0.%beta.1
 %else
 Release:        1
-Source1:        http://samba.org/ftp/tdb/tdb-%{version}.tar.asc
-Source2:        tridge.asc
+Source1:        http://talloc.samba.org/ftp/tdb/tdb-%{version}.tar.asc
+Source2:        samba-pubkey.asc
 %endif
 Group:          System/Libraries
 License:        GPLv2
 URL:            http://tdb.samba.org/
 Summary:        Library implementing Samba's embedded database
-Source0:        http://samba.org/ftp/tdb/tdb-%{version}.tar.xz
+Source0:        http://talloc.samba.org/ftp/tdb/tdb-%{version}.tar.gz
 BuildRequires:  python-devel xsltproc docbook-style-xsl
 
 %description
