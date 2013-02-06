@@ -37,6 +37,13 @@ Summary:        Library implementing Samba's embedded database
 Source0:        http://talloc.samba.org/ftp/tdb/tdb-%{version}.tar.gz
 BuildRequires:  python-devel xsltproc docbook-style-xsl
 
+%track
+prog %name = {
+	url = http://talloc.samba.org/ftp/tdb/
+	regex = %name-(__VER__)\.tar\.gz
+	version = %version
+}
+
 %description
 Library implementing Samba's embedded database and utilities for backing up,
 restoring and manipulating the database.
