@@ -1,3 +1,6 @@
+removed_sources:
+  tdb-1.2.11.tar.gz: 9dfc471185851da74de2423fddc00cbb5f6095d1
 sources:
   tdb-1.2.11.tar.asc: 9e6c4184cceb56b6db234ee8195012439c4cb723
-  tdb-1.2.11.tar.gz: 9dfc471185851da74de2423fddc00cbb5f6095d1
+  tdb-1.2.12.tar.asc: c4b5d2b96cf270d06ccb73ce98d81ed90740d031
+  tdb-1.2.12.tar.gz: 5c6d0b7108a261e7a57172f8ae06b6d327217dfd
