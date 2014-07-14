@@ -35,7 +35,8 @@ License:        GPLv2
 URL:            http://tdb.samba.org/
 Summary:        Library implementing Samba's embedded database
 Source0:        http://talloc.samba.org/ftp/tdb/tdb-%{version}.tar.gz
-BuildRequires:  python-devel xsltproc docbook-style-xsl
+Patch0:		fix-include-bool.h
+BuildRequires:  python2-devel xsltproc docbook-style-xsl
 
 %track
 prog %name = {
@@ -94,15 +95,21 @@ rm -f $VERIFYSOURCE
 %endif
 
 %setup -q
+%apply_patches
 
 %build
-export PYTHONDIR=%{py_platsitedir}
-%configure2_5x	--disable-rpath
+%setup_compile_flags
+export PYTHON=%{_bindir}/python2
+export PYTHONDIR=%{py2_platsitedir}
+export CC=%{__cc}
+export CPP=%{__cxx}
+sed -i 's|#!/usr/bin/env python|#!/usr/bin/python2|g' buildtools/bin/waf
+./configure --prefix=%{_prefix} --libdir=%{_libdir}
 %make
 
 %install
 %makeinstall_std
-chmod 755 %{buildroot}%{_libdir}/libtdb.so.%{major}* %{buildroot}%{py_platsitedir}/tdb.so
+chmod 755 %{buildroot}%{_libdir}/libtdb.so.%{major}* %{buildroot}%{py2_platsitedir}/tdb.so
 
 %files -n %{libname}
 %{_libdir}/libtdb.so.%{major}*
@@ -118,4 +125,4 @@ chmod 755 %{buildroot}%{_libdir}/libtdb.so.%{major}* %{buildroot}%{py_platsitedi
 %{_mandir}/man8/tdb*.8*
 
 %files -n python-tdb
-%{py_platsitedir}/tdb.so
+%{py2_platsitedir}/tdb.so
