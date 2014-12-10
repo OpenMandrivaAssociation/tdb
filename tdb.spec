@@ -20,7 +20,7 @@ rm -Rf $GNUPGHOME \
 
 
 Name:           tdb
-Version:        1.3.0
+Version:        1.3.3
 # We shipped it in samba3 versioned with the samba3 version
 Epoch:          1
 %if "%beta" != ""
@@ -35,7 +35,6 @@ License:        GPLv2
 URL:            http://tdb.samba.org/
 Summary:        Library implementing Samba's embedded database
 Source0:        http://talloc.samba.org/ftp/tdb/tdb-%{version}.tar.gz
-Patch0:		fix-include-bool.h
 BuildRequires:  python2-devel xsltproc docbook-style-xsl
 
 %track
