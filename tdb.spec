@@ -20,26 +20,26 @@ rm -Rf $GNUPGHOME \
 
 
 Name:           tdb
-Version:        1.2.12
+Version:        1.3.3
 # We shipped it in samba3 versioned with the samba3 version
 Epoch:          1
 %if "%beta" != ""
 Release:	0.%beta.1
 %else
-Release:        2
-Source1:        http://talloc.samba.org/ftp/tdb/tdb-%{version}.tar.asc
+Release:        1
+Source1:        https://talloc.samba.org/ftp/tdb/tdb-%{version}.tar.asc
 Source2:        samba-pubkey.asc
 %endif
 Group:          System/Libraries
 License:        GPLv2
-URL:            http://tdb.samba.org/
+URL:            https://tdb.samba.org/
 Summary:        Library implementing Samba's embedded database
-Source0:        http://talloc.samba.org/ftp/tdb/tdb-%{version}.tar.gz
+Source0:        https://talloc.samba.org/ftp/tdb/tdb-%{version}.tar.gz
 BuildRequires:  python-devel xsltproc docbook-style-xsl
 
 %track
 prog %name = {
-	url = http://talloc.samba.org/ftp/tdb/
+	url = https://talloc.samba.org/ftp/tdb/
 	regex = %name-(__VER__)\.tar\.gz
 	version = %version
 }
