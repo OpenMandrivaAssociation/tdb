@@ -1,6 +1,4 @@
-removed_sources:
-  tdb-1.3.3.tar.gz: eb64808ff23263fdfc11e393cadcbf4dfd68d5d2
+---
 sources:
-  tdb-1.3.3.tar.asc: 0629e6398aace4f3fcf103531da0a8d8b7432a09
-  tdb-1.3.4.tar.asc: 85a2e12278cc1cc950d7f9f0ee6712aa5a54c2c3
-  tdb-1.3.4.tar.gz: 585d188267e4ba698c86b86703cc8cd97f1a71ac
+  tdb-1.3.5.tar.asc: fca845568b13c1c2dcc58bc09b0fb40ea9ff98ee
+  tdb-1.3.5.tar.gz: 6d2b3dc487f69d4b10ae1b6abfd95f2fe752fefc
