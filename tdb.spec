@@ -20,7 +20,7 @@ rm -Rf $GNUPGHOME \
 
 
 Name:           tdb
-Version:        1.3.3
+Version:        1.3.8
 # We shipped it in samba3 versioned with the samba3 version
 Epoch:          1
 %if "%beta" != ""
@@ -119,3 +119,4 @@ chmod 755 %{buildroot}%{_libdir}/libtdb.so.%{major}* %{buildroot}%{py_platsitedi
 
 %files -n python-tdb
 %{py_platsitedir}/tdb.so
+%{py_platsitedir}/*.py
