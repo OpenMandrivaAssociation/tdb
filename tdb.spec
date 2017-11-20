@@ -20,11 +20,11 @@ rm -Rf $GNUPGHOME \
 
 
 Name:           tdb
-Version:        1.3.14
+Version:        1.3.15
 # We shipped it in samba3 versioned with the samba3 version
 Epoch:          1
 %if "%beta" != ""
-Release:	0.%beta.1
+Release:	1.%beta.1
 %else
 Release:        1
 Source1:        https://talloc.samba.org/ftp/tdb/tdb-%{version}.tar.asc
