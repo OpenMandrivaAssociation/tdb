@@ -26,7 +26,7 @@ Epoch:          1
 %if "%beta" != ""
 Release:	1.%beta.1
 %else
-Release:        1
+Release:        2
 Source1:        https://talloc.samba.org/ftp/tdb/tdb-%{version}.tar.asc
 Source2:        samba-pubkey.asc
 %endif
