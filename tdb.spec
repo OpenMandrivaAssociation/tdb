@@ -120,4 +120,4 @@ chmod 755 %{buildroot}%{_libdir}/libtdb.so.%{major}* %{buildroot}%{py2_platsited
 
 %files -n python-tdb
 %{py2_platsitedir}/tdb.so
-%{_libdir}/python2*/site-packages/*.py
+%{_libdir}/python2*/site-packages/*.py*
