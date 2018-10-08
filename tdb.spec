@@ -20,13 +20,13 @@ rm -Rf $GNUPGHOME \
 
 
 Name:           tdb
-Version:        1.3.15
+Version:        1.3.16
 # We shipped it in samba3 versioned with the samba3 version
 Epoch:          1
 %if "%beta" != ""
 Release:	1.%beta.1
 %else
-Release:        1
+Release:        2
 Source1:        https://talloc.samba.org/ftp/tdb/tdb-%{version}.tar.asc
 Source2:        samba-pubkey.asc
 %endif
@@ -38,13 +38,6 @@ Source0:        https://talloc.samba.org/ftp/tdb/tdb-%{version}.tar.gz
 BuildRequires:  pkgconfig(python2)
 BuildRequires:  xsltproc
 BuildRequires:  docbook-style-xsl
-
-%track
-prog %name = {
-	url = https://talloc.samba.org/ftp/tdb/
-	regex = %name-(__VER__)\.tar\.gz
-	version = %version
-}
 
 %description
 Library implementing Samba's embedded database and utilities for backing up,
@@ -127,4 +120,4 @@ chmod 755 %{buildroot}%{_libdir}/libtdb.so.%{major}* %{buildroot}%{py2_platsited
 
 %files -n python-tdb
 %{py2_platsitedir}/tdb.so
-%{_libdir}/python2*/site-packages/*.py
+%{_libdir}/python2*/site-packages/*.py*
