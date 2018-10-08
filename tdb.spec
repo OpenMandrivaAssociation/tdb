@@ -39,13 +39,6 @@ BuildRequires:  pkgconfig(python2)
 BuildRequires:  xsltproc
 BuildRequires:  docbook-style-xsl
 
-%track
-prog %name = {
-	url = https://talloc.samba.org/ftp/tdb/
-	regex = %name-(__VER__)\.tar\.gz
-	version = %version
-}
-
 %description
 Library implementing Samba's embedded database and utilities for backing up,
 restoring and manipulating the database.
