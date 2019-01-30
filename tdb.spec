@@ -20,13 +20,13 @@ rm -Rf $GNUPGHOME \
 
 
 Name:           tdb
-Version:        1.3.16
+Version:        1.3.17
 # We shipped it in samba3 versioned with the samba3 version
 Epoch:          1
 %if "%beta" != ""
 Release:	1.%beta.1
 %else
-Release:        3
+Release:        1
 Source1:        https://talloc.samba.org/ftp/tdb/tdb-%{version}.tar.asc
 Source2:        samba-pubkey.asc
 %endif
@@ -98,7 +98,9 @@ export PYTHONDIR=%{py2_platsitedir}
 export CC=%{__cc}
 export CPP=%{__cxx}
 sed -i 's|#!/usr/bin/env python|#!/usr/bin/python2|g' buildtools/bin/waf
+sed -i 's!WAF_BINARY=$(PYTHON) ../../buildtools/bin/waf!WAF_BINARY=/usr/bin/python2 ./buildtools/bin/waf!' Makefile
 ./configure --prefix=%{_prefix} --libdir=%{_libdir}
+pwd
 %make
 
 %install
