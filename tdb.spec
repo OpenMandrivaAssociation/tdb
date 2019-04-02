@@ -18,13 +18,10 @@ gpg --import %{1} \
 gpg --trust-model always --verify %{2} \
 rm -Rf $GNUPGHOME \
 
-
 Name:           tdb
-Version:        1.3.17
-# We shipped it in samba3 versioned with the samba3 version
-Epoch:          1
+Version:        1.4.0
 %if "%beta" != ""
-Release:	1.%beta.1
+Release:	0.%beta.1
 %else
 Release:        1
 Source1:        https://talloc.samba.org/ftp/tdb/tdb-%{version}.tar.asc
@@ -35,7 +32,7 @@ License:        GPLv2
 URL:            https://tdb.samba.org/
 Summary:        Library implementing Samba's embedded database
 Source0:        https://talloc.samba.org/ftp/tdb/tdb-%{version}.tar.gz
-BuildRequires:  pkgconfig(python2)
+BuildRequires:  pkgconfig(python)
 BuildRequires:  xsltproc
 BuildRequires:  docbook-style-xsl
 
@@ -93,19 +90,15 @@ rm -f $VERIFYSOURCE
 
 %build
 %setup_compile_flags
-export PYTHON=%{_bindir}/python2
-export PYTHONDIR=%{py2_platsitedir}
 export CC=%{__cc}
 export CPP=%{__cxx}
-sed -i 's|#!/usr/bin/env python|#!/usr/bin/python2|g' buildtools/bin/waf
-sed -i 's!WAF_BINARY=$(PYTHON) ../../buildtools/bin/waf!WAF_BINARY=/usr/bin/python2 ./buildtools/bin/waf!' Makefile
 ./configure --prefix=%{_prefix} --libdir=%{_libdir}
 pwd
 %make
 
 %install
 %makeinstall_std
-chmod 755 %{buildroot}%{_libdir}/libtdb.so.%{major}* %{buildroot}%{py2_platsitedir}/tdb.so
+chmod 755 %{buildroot}%{_libdir}/libtdb.so.%{major}*
 
 %files -n %{libname}
 %{_libdir}/libtdb.so.%{major}*
@@ -121,5 +114,6 @@ chmod 755 %{buildroot}%{_libdir}/libtdb.so.%{major}* %{buildroot}%{py2_platsited
 %{_mandir}/man8/tdb*.8*
 
 %files -n python-tdb
-%{py2_platsitedir}/tdb.so
-%{_libdir}/python2*/site-packages/*.py*
+%{py_platsitedir}/tdb*.so
+%{_libdir}/python*/site-packages/*.py*
+%{_libdir}/python*/site-packages/__pycache__/*
