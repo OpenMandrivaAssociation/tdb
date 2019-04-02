@@ -92,8 +92,11 @@ rm -f $VERIFYSOURCE
 %setup_compile_flags
 export CC=%{__cc}
 export CPP=%{__cxx}
-./configure --prefix=%{_prefix} --libdir=%{_libdir}
-pwd
+if ! ./configure --prefix=%{_prefix} --libdir=%{_libdir}; then
+	echo "Configure failed -- log:"
+	cat bin/config.log
+	exit 1
+fi
 %make
 
 %install
