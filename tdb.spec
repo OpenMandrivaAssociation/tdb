@@ -19,7 +19,7 @@ gpg --trust-model always --verify %{2} \
 rm -Rf $GNUPGHOME \
 
 Name:           tdb
-Version:        1.4.0
+Version:        1.4.2
 %if "%beta" != ""
 Release:	0.%beta.1
 %else
