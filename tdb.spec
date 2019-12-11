@@ -23,7 +23,7 @@ Version:        1.4.2
 %if "%beta" != ""
 Release:	0.%beta.1
 %else
-Release:        1
+Release:        2
 Source1:        https://talloc.samba.org/ftp/tdb/tdb-%{version}.tar.asc
 Source2:        samba-pubkey.asc
 %endif
