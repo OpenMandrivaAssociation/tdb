@@ -1,3 +1,6 @@
+# For python modules
+%global _disable_ld_no_undefined 1
+
 %define major   1
 %define libname %mklibname tdb %{major}
 %define devname %mklibname -d tdb
@@ -19,11 +22,11 @@ gpg --trust-model always --verify %{2} \
 rm -Rf $GNUPGHOME \
 
 Name:           tdb
-Version:        1.4.2
+Version:        1.4.3
 %if "%beta" != ""
 Release:	0.%beta.1
 %else
-Release:        2
+Release:        1
 Source1:        https://talloc.samba.org/ftp/tdb/tdb-%{version}.tar.asc
 Source2:        samba-pubkey.asc
 %endif
