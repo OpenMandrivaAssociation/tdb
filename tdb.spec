@@ -1,9 +1,15 @@
+%ifarch %{x86_64}
+%bcond_without compat32
+%endif
+
 # For python modules
 %global _disable_ld_no_undefined 1
 
 %define major   1
 %define libname %mklibname tdb %{major}
 %define devname %mklibname -d tdb
+%define lib32name %mklib32name tdb %{major}
+%define dev32name %mklib32name -d tdb
 %define beta %nil
 
 # beta releases are taken from the samba4 tarball using
@@ -35,9 +41,14 @@ License:        GPLv2
 URL:            https://tdb.samba.org/
 Summary:        Library implementing Samba's embedded database
 Source0:        https://talloc.samba.org/ftp/tdb/tdb-%{version}.tar.gz
-BuildRequires:  pkgconfig(python)
+Source100:	tdb-1.4.3-python32.patch
+BuildRequires:  pkgconfig(python3)
 BuildRequires:  xsltproc
 BuildRequires:  docbook-style-xsl
+%if %{with compat32}
+BuildRequires:	devel(libpython3.8)
+BuildRequires:	devel(libintl)
+%endif
 
 %description
 Library implementing Samba's embedded database and utilities for backing up,
@@ -76,6 +87,24 @@ Summary:        Python bindings to Samba's tdb embedded database
 %description -n python-tdb
 Pyhton bindings to Samba's tdb embedded database
 
+%if %{with compat32}
+%package -n     %{lib32name}
+Group:          System/Libraries
+Summary:        Library implementing Samba's embedded database (32-bit)
+
+%description -n %{lib32name}
+Library implementing Samba's embedded database
+
+%package -n     %{dev32name}
+Group:          Development/C
+Summary:        Library implementing Samba's embedded database (32-bit)
+Requires:       %{devname} = %{EVRD}
+Requires:       %{lib32name} = %{EVRD}
+
+%description -n %{dev32name}
+Library implementing Samba's embedded database
+%endif
+
 %prep
 %if "%beta" == ""
 #Try and validate signatures on source:
@@ -88,10 +117,28 @@ gzip -dc %{SOURCE0} > $VERIFYSOURCE
 rm -f $VERIFYSOURCE
 %endif
 
-%setup -q
-%autopatch -p1
+%autosetup -p1
 
 %build
+%if %{with compat32}
+mkdir build32
+cp -a $(ls -1 |grep -v build32) build32/
+cd build32
+patch -p1 -z .omv32~ -b <%{S:100}
+export CC="gcc -m32"
+export CPP="g++ -m32"
+cat >python3-config <<'EOF'
+#!/bin/sh
+/usr/bin/python3-config "$@" |sed -e 's,-m64,-m32,g;s,lib64,lib,g;s,-lintl,,g'
+EOF
+chmod +x python3-config
+export PYTHON_CONFIG="$(pwd)/python3-config"
+./configure --prefix=%{_prefix} --libdir=%{_prefix}/lib
+%make_build
+rm -f python3-config
+cd ..
+%endif
+
 %setup_compile_flags
 export CC=%{__cc}
 export CPP=%{__cxx}

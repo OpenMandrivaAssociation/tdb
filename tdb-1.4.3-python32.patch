@@ -1,0 +1,19 @@
+diff -up tdb-1.4.3/third_party/waf/waflib/Tools/python.py.omv~ tdb-1.4.3/third_party/waf/waflib/Tools/python.py
+--- tdb-1.4.3/third_party/waf/waflib/Tools/python.py.omv~	2020-06-02 18:15:31.845692648 +0200
++++ tdb-1.4.3/third_party/waf/waflib/Tools/python.py	2020-06-02 18:26:19.022039380 +0200
+@@ -325,6 +325,15 @@ def check_python_headers(conf, features=
+ 	conf.to_log("Configuration returned from %r:\n%s\n" % (pybin, '\n'.join(vals)))
+ 
+ 	dct = dict(zip(v, lst))
++
++	# Override some hardcoded 64-bit things...
++	dct['SO']=dct['SO'].replace('x86_64','i386')
++	dct['LDFLAGS']=dct['LDFLAGS'].replace('m64','m32')
++	dct['LIBDIR']='/usr/lib'
++	dct['LIBPL']='/usr/lib/python' + dct['LDVERSION'] + '/config-'
++	dct['LDSHARED']=dct['LDSHARED'].replace('m64','m32')
++	dct['CFLAGS']=dct['CFLAGS'].replace('m64','m32')
++
+ 	x = 'MACOSX_DEPLOYMENT_TARGET'
+ 	if dct[x]:
+ 		env[x] = conf.environ[x] = dct[x]
