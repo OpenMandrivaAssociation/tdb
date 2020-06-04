@@ -48,6 +48,7 @@ BuildRequires:  docbook-style-xsl
 %if %{with compat32}
 BuildRequires:	devel(libpython3.8)
 BuildRequires:	devel(libintl)
+BuildRequires:	libcrypt-devel
 %endif
 
 %description
