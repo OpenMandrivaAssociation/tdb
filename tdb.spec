@@ -32,7 +32,7 @@ Version:        1.4.3
 %if "%beta" != ""
 Release:	0.%beta.1
 %else
-Release:        1
+Release:        2
 Source1:        https://talloc.samba.org/ftp/tdb/tdb-%{version}.tar.asc
 Source2:        samba-pubkey.asc
 %endif
@@ -150,7 +150,10 @@ fi
 %make
 
 %install
-%makeinstall_std
+%if %{with compat32}
+%make_install -C build32
+%endif
+%make_install
 chmod 755 %{buildroot}%{_libdir}/libtdb.so.%{major}*
 
 %files -n %{libname}
@@ -170,3 +173,12 @@ chmod 755 %{buildroot}%{_libdir}/libtdb.so.%{major}*
 %{py_platsitedir}/tdb*.so
 %{_libdir}/python*/site-packages/*.py*
 %{_libdir}/python*/site-packages/__pycache__/*
+
+%if %{with compat32}
+%files -n %{lib32name}
+%{_prefix}/lib/libtdb.so.%{major}*
+
+%files -n %{dev32name}
+%{_prefix}/lib/libtdb.so
+%{_prefix}/lib/pkgconfig/tdb.pc
+%endif
