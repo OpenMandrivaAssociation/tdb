@@ -153,6 +153,8 @@ fi
 %install
 %if %{with compat32}
 %make_install -C build32
+# No need to package the 32-bit python module
+rm -rf %{buildroot}%{_libdir}/python*
 %endif
 %make_install
 chmod 755 %{buildroot}%{_libdir}/libtdb.so.%{major}*
