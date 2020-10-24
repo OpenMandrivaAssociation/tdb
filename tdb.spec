@@ -46,7 +46,7 @@ BuildRequires:  pkgconfig(python3)
 BuildRequires:  xsltproc
 BuildRequires:  docbook-style-xsl
 %if %{with compat32}
-BuildRequires:	devel(libpython3.8)
+BuildRequires:	devel(libpython3.9)
 BuildRequires:	devel(libintl)
 BuildRequires:	libcrypt-devel
 %endif
