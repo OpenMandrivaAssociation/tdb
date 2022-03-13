@@ -175,7 +175,7 @@ chmod 755 %{buildroot}%{_libdir}/libtdb.so.%{major}*
 %files -n python-tdb
 %{py_platsitedir}/tdb*.so
 %{_libdir}/python*/site-packages/*.py*
-%{_libdir}/python*/site-packages/__pycache__/*
+# %{_libdir}/python*/site-packages/__pycache__/*
 
 %if %{with compat32}
 %files -n %{lib32name}
