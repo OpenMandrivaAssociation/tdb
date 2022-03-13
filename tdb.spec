@@ -32,7 +32,7 @@ Version:        1.4.6
 %if "%beta" != ""
 Release:	1.%beta.1
 %else
-Release:        1
+Release:        2
 Source1:        https://talloc.samba.org/ftp/tdb/tdb-%{version}.tar.asc
 Source2:        samba-pubkey.asc
 %endif
@@ -46,7 +46,7 @@ BuildRequires:  pkgconfig(python3)
 BuildRequires:  xsltproc
 BuildRequires:  docbook-style-xsl
 %if %{with compat32}
-BuildRequires:	devel(libpython3.9)
+BuildRequires:	devel(libpython3.11)
 BuildRequires:	devel(libintl)
 BuildRequires:	libcrypt-devel
 %endif
