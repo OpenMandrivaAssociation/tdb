@@ -28,11 +28,11 @@ gpg --trust-model always --verify %{2} \
 rm -Rf $GNUPGHOME \
 
 Name:           tdb
-Version:        1.4.6
+Version:	1.4.7
 %if "%beta" != ""
-Release:	1.%beta.1
+Release:	1
 %else
-Release:        2
+Release:	1
 Source1:        https://talloc.samba.org/ftp/tdb/tdb-%{version}.tar.asc
 Source2:        samba-pubkey.asc
 %endif
