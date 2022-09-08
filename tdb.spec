@@ -49,6 +49,7 @@ BuildRequires:  docbook-style-xsl
 BuildRequires:	devel(libpython3.11)
 BuildRequires:	devel(libintl)
 BuildRequires:	libcrypt-devel
+BuildRequires:	libc6
 %endif
 
 %description
