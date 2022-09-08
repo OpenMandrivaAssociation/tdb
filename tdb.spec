@@ -6,9 +6,9 @@
 %global _disable_ld_no_undefined 1
 
 %define major   1
-%define libname %mklibname tdb %{major}
+%define libname %mklibname tdb
 %define devname %mklibname -d tdb
-%define lib32name %mklib32name tdb %{major}
+%define lib32name %mklib32name tdb
 %define dev32name %mklib32name -d tdb
 %define beta %nil
 
@@ -58,6 +58,7 @@ restoring and manipulating the database.
 %package -n     %{libname}
 Group:          System/Libraries
 Summary:        Library implementing Samba's embedded database
+%rename %{mklibname tdb 1}
 
 %description -n %{libname}
 Library implementing Samba's embedded database
@@ -92,6 +93,7 @@ Pyhton bindings to Samba's tdb embedded database
 %package -n     %{lib32name}
 Group:          System/Libraries
 Summary:        Library implementing Samba's embedded database (32-bit)
+%rename libtdb1
 
 %description -n %{lib32name}
 Library implementing Samba's embedded database
