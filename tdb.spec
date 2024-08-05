@@ -28,7 +28,7 @@ gpg --trust-model always --verify %{2} \
 rm -Rf $GNUPGHOME \
 
 Name:           tdb
-Version:	1.4.10
+Version:	1.4.11
 Release:	%{?beta.0.%{beta}.}1
 Group:          System/Libraries
 License:        GPLv2
