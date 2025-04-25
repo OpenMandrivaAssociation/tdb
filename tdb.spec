@@ -29,13 +29,12 @@ rm -Rf $GNUPGHOME \
 
 Name:           tdb
 Version:	1.4.13
-Release:	%{?beta.0.%{beta}.}1
+Release:	%{?beta.0.%{beta}.}2
 Group:          System/Libraries
 License:        GPLv2
 URL:            https://tdb.samba.org/
 Summary:        Library implementing Samba's embedded database
 Source0:        https://talloc.samba.org/ftp/tdb/tdb-%{version}.tar.gz
-Source100:	tdb-1.4.3-python32.patch
 BuildRequires:  pkgconfig(python3)
 BuildRequires:  xsltproc
 BuildRequires:  docbook-style-xsl
@@ -121,18 +120,10 @@ rm -f $VERIFYSOURCE
 mkdir build32
 cp -a $(ls -1 |grep -v build32) build32/
 cd build32
-patch -p1 -z .omv32~ -b <%{S:100}
-export CC="gcc -m32"
-export CPP="g++ -m32"
-cat >python3-config <<'EOF'
-#!/bin/sh
-/usr/bin/python3-config "$@" |sed -e 's,-m64,-m32,g;s,lib64,lib,g;s,-lintl,,g'
-EOF
-chmod +x python3-config
-export PYTHON_CONFIG="$(pwd)/python3-config"
-./configure --prefix=%{_prefix} --libdir=%{_prefix}/lib
+export CC="%{__cc} -m32"
+export CPP="%{__cxx} -m32"
+./configure --prefix=%{_prefix} --libdir=%{_prefix}/lib --disable-python
 %make_build
-rm -f python3-config
 cd ..
 %endif
 
@@ -144,13 +135,11 @@ if ! ./configure --prefix=%{_prefix} --libdir=%{_libdir}; then
 	cat bin/config.log
 	exit 1
 fi
-%make
+%make_build
 
 %install
 %if %{with compat32}
 %make_install -C build32
-# No need to package the 32-bit python module
-rm -rf %{buildroot}%{_libdir}/python*
 %endif
 %make_install
 chmod 755 %{buildroot}%{_libdir}/libtdb.so.%{major}*
