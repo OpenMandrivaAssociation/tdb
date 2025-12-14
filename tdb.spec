@@ -28,8 +28,8 @@ gpg --trust-model always --verify %{2} \
 rm -Rf $GNUPGHOME \
 
 Name:           tdb
-Version:	1.4.13
-Release:	%{?beta.0.%{beta}.}2
+Version:	1.4.14
+Release:	%{?beta.0.%{beta}.}1
 Group:          System/Libraries
 License:        GPLv2
 URL:            https://tdb.samba.org/
@@ -38,6 +38,7 @@ Source0:        https://talloc.samba.org/ftp/tdb/tdb-%{version}.tar.gz
 BuildRequires:  pkgconfig(python3)
 BuildRequires:  xsltproc
 BuildRequires:  docbook-style-xsl
+BuildRequires:  make
 %if %{with compat32}
 BuildRequires:	devel(libpython%{pyver})
 BuildRequires:	libcrypt-devel
@@ -158,9 +159,8 @@ chmod 755 %{buildroot}%{_libdir}/libtdb.so.%{major}*
 %{_mandir}/man8/tdb*.8*
 
 %files -n python-tdb
-%{py_platsitedir}/tdb*.so
-%{_libdir}/python*/site-packages/*.py*
-# %{_libdir}/python*/site-packages/__pycache__/*
+%{py_sitedir}/_%{name}*.py*
+%{py_sitedir}/%name.cpython*.so
 
 %if %{with compat32}
 %files -n %{lib32name}
