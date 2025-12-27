@@ -29,7 +29,7 @@ rm -Rf $GNUPGHOME \
 
 Name:           tdb
 Version:	1.4.14
-Release:	%{?beta.0.%{beta}.}1
+Release:	%{?beta.0.%{beta}.}2
 Group:          System/Libraries
 License:        GPLv2
 URL:            https://tdb.samba.org/
