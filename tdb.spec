@@ -29,7 +29,7 @@ rm -Rf $GNUPGHOME \
 
 Name:           tdb
 Version:	1.4.14
-Release:	%{?beta.0.%{beta}.}2
+Release:	%{?beta.0.%{beta}.}3
 Group:          System/Libraries
 License:        GPLv2
 URL:            https://tdb.samba.org/
@@ -44,7 +44,6 @@ BuildRequires:  xsltproc
 BuildRequires:  docbook-style-xsl
 BuildRequires:  make
 %if %{with compat32}
-BuildRequires:	devel(libpython%{pyver})
 BuildRequires:	libcrypt-devel
 BuildRequires:	libc6
 %endif
