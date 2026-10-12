@@ -29,7 +29,7 @@ rm -Rf $GNUPGHOME \
 
 Name:           tdb
 Version:	1.4.15
-Release:	%{?beta.0.%{beta}.}4
+Release:	%{?beta.0.%{beta}.}5
 Group:          System/Libraries
 License:        GPLv2
 URL:            https://tdb.samba.org/
@@ -39,7 +39,7 @@ BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	libtool-base
 BuildRequires:	slibtool
-BuildRequires:  pkgconfig(python3)
+BuildRequires:  pkgconfig(python)
 BuildRequires:  xsltproc
 BuildRequires:  docbook-style-xsl
 BuildRequires:  make
@@ -124,9 +124,10 @@ rm -f $VERIFYSOURCE
 mkdir build32
 cp -a $(ls -1 |grep -v build32) build32/
 cd build32
-export CC="%{__cc} -m32"
-export CPP="%{__cxx} -m32"
-./configure --prefix=%{_prefix} --libdir=%{_prefix}/lib --disable-python
+# clang cannot build the 32-bit library
+export CC="gcc -m32"
+export CPP="g++ -m32"
+./configure --prefix=%{_prefix} --libdir=%{_usr}/lib --disable-python
 %make_build
 cd ..
 %endif
@@ -167,9 +168,9 @@ chmod 755 %{buildroot}%{_libdir}/libtdb.so.%{major}*
 
 %if %{with compat32}
 %files -n %{lib32name}
-%{_prefix}/lib/libtdb.so.%{major}*
+%{_usr}/lib/libtdb.so.%{major}*
 
 %files -n %{dev32name}
-%{_prefix}/lib/libtdb.so
-%{_prefix}/lib/pkgconfig/tdb.pc
+%{_usr}/lib/libtdb.so
+%{_usr}/lib/pkgconfig/tdb.pc
 %endif
